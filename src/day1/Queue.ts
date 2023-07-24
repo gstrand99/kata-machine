@@ -14,7 +14,7 @@ export default class Queue<T> {
     }
 
     enqueue(item: T): void {
-        console.log(this, item)
+        console.log(this, item);
         const node = { value: item } as QNode<T>;
         this.length++;
         if (!this.tail) {
@@ -24,8 +24,6 @@ export default class Queue<T> {
 
         this.tail.next = node;
         this.tail = node;
-
-
     }
     deque(): T | undefined {
         if (!this.head) {
@@ -38,7 +36,7 @@ export default class Queue<T> {
         this.head = this.head.next;
 
         if (this.length === 0) {
-            this.tail = undefined
+            this.tail = undefined;
         }
 
         return head.value;

@@ -1,16 +1,26 @@
 const dir = [
-[-1,0],
-[1,0],
-[0,-1],
-[0,1],
+  [-1, 0],
+  [1, 0],
+  [0, -1],
+  [0, 1],
 ];
 
-function walk(maze: string[], wall: string, curr: Point, end: Point, seen: boolean[][], path: Point[]): boolean{
-
+function walk(
+  maze: string[],
+  wall: string,
+  curr: Point,
+  end: Point,
+  seen: boolean[][],
+  path: Point[],
+): boolean {
   // 1. Base Case
   // off the map
-  if (curr.x < 0 || curr.x >= maze[0].length ||
-      curr.y < 0 || curr.y >= maze.length) {
+  if (
+    curr.x < 0 ||
+    curr.x >= maze[0].length ||
+    curr.y < 0 ||
+    curr.y >= maze.length
+  ) {
     return false;
   }
 
@@ -21,7 +31,7 @@ function walk(maze: string[], wall: string, curr: Point, end: Point, seen: boole
 
   // at the emd
   if (curr.x === end.x && curr.y === end.y) {
-    path.push(end)
+    path.push(end);
     return true;
   }
 
@@ -37,11 +47,20 @@ function walk(maze: string[], wall: string, curr: Point, end: Point, seen: boole
 
   // recurson
   for (let i = 0; i < dir.length; ++i) {
-    const [x,y] = dir[i];
-    if (walk(maze, wall, {
-      x: curr.x + x,
-      y: curr.y + y,
-      }, end, seen, path)) {
+    const [x, y] = dir[i];
+    if (
+      walk(
+        maze,
+        wall,
+        {
+          x: curr.x + x,
+          y: curr.y + y,
+        },
+        end,
+        seen,
+        path,
+      )
+    ) {
       return true;
     }
   }
@@ -49,10 +68,15 @@ function walk(maze: string[], wall: string, curr: Point, end: Point, seen: boole
   // post
   path.pop();
 
-  return false
+  return false;
 }
 
-export default function solve(maze: string[], wall: string, start: Point, end: Point): Point[] {
+export default function solve(
+  maze: string[],
+  wall: string,
+  start: Point,
+  end: Point,
+): Point[] {
   const seen: boolean[][] = [];
   const path: Point[] = [];
 
@@ -62,5 +86,5 @@ export default function solve(maze: string[], wall: string, start: Point, end: P
 
   walk(maze, wall, start, end, seen, path);
 
-  return path
+  return path;
 }
